@@ -172,6 +172,18 @@ class GeneradorCronograma {
     }
 
     /**
+     * Encuentra el primer dia que cualquier supervisor perfora
+     */
+    encontrarPrimerDiaPerforacionGlobal() {
+        for (let d = 0; d < this.totalDias; d++) {
+            if (this.estaPerforando(this.s1, d) || this.estaPerforando(this.s2, d) || this.estaPerforando(this.s3, d)) {
+                return d;
+            }
+        }
+        return this.totalDias;
+    }
+
+    /**
      * Encuentra el primer dia que S3 perfora
      */
     encontrarPrimerDiaS3Perfora() {
@@ -329,9 +341,9 @@ class GeneradorCronograma {
      * Correccion final para garantizar exactamente 2 perforando
      */
     correccionFinal() {
-        const diaS3Perfora = this.encontrarPrimerDiaS3Perfora();
+        const diaInicio = this.encontrarPrimerDiaPerforacionGlobal();
 
-        for (let dia = diaS3Perfora; dia < this.config.diasPerforacionTotal; dia++) {
+        for (let dia = diaInicio; dia < this.config.diasPerforacionTotal; dia++) {
             const count = this.contarPerforando(dia);
 
             if (count < 2) {

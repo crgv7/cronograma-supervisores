@@ -127,6 +127,15 @@ class GeneradorCronograma {
     }
   }
 
+  encontrarPrimerDiaPerforacionGlobal() {
+    for (let d = 0; d < this.totalDias; d++) {
+      if (this.estaPerforando(this.s1, d) || this.estaPerforando(this.s2, d) || this.estaPerforando(this.s3, d)) {
+        return d;
+      }
+    }
+    return this.totalDias;
+  }
+
   encontrarPrimerDiaS3Perfora() {
     for (let d = 0; d < this.s3.length; d++) {
       if (this.s3[d] === Estado.PERFORACION) {
@@ -246,9 +255,10 @@ class GeneradorCronograma {
   }
 
   correccionFinal() {
+    const diaInicio = this.encontrarPrimerDiaPerforacionGlobal();
     const diaS3Perfora = this.encontrarPrimerDiaS3Perfora();
 
-    for (let dia = diaS3Perfora; dia < this.config.diasPerforacionTotal; dia++) {
+    for (let dia = diaInicio; dia < this.config.diasPerforacionTotal; dia++) {
       const count = this.contarPerforando(dia);
 
       if (count < 2) {
@@ -336,9 +346,9 @@ class GeneradorCronograma {
       masDe2: []
     };
 
-    const diaS3Perfora = this.encontrarPrimerDiaS3Perfora();
+    const diaInicio = this.encontrarPrimerDiaPerforacionGlobal();
 
-    for (let d = diaS3Perfora; d < this.config.diasPerforacionTotal; d++) {
+    for (let d = diaInicio; d < this.config.diasPerforacionTotal; d++) {
       const count = this.contarPerforando(d);
       if (count < 2) {
         violaciones.menosDe2.push(d);
