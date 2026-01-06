@@ -126,7 +126,7 @@ function AlertsSection({ resultado }) {
       type: 'success',
       icon: '✅',
       title: 'Cronograma Válido',
-      message: 'Siempre hay exactamente 2 supervisores perforando después del día ' + diaS3Perfora
+      message: 'Siempre hay exactamente 2 supervisores perforando'
     });
   }
 
