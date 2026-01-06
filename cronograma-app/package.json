@@ -2,7 +2,7 @@
   "name": "cronograma-supervisores",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://tu-usuario.github.io/cronograma-supervisores",
+  "homepage": "https://crgv7.github.io/cronograma-supervisores",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
